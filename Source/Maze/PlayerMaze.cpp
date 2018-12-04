@@ -121,3 +121,13 @@ void APlayerMaze::SwitchCams()
 	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Created Camera Controller reference")); //debug message
 	CamAct->SwitchCam(GetWorld()->GetFirstPlayerController(), FollowCamera, this);
 }
+
+void APlayerMaze::AddPickup()
+{
+	//add one to the current pickups
+	CurrentPickups = CurrentPickups + 1;
+	
+	//output current number of pickups
+	FString output = FString::FromInt(CurrentPickups);
+	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, output);
+}

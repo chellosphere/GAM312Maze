@@ -55,11 +55,19 @@ void APickUp::Tick(float DeltaTime)
 void APickUp::BeginOverlap(UPrimitiveComponent * OverlappedComponent, AActor * OtherActor, UPrimitiveComponent * OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult)
 {
 	//if the object can be distroyed - this variable can be set for each blueprint
-	if (CanBeDistroyed)
+	APlayerMaze* Player = Cast<APlayerMaze>(OtherActor);
+	if (Player)
 	{
-		Destroy();
-		GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Red, TEXT("You Got Me!")); //display a message that they have picked it up
-	}
+		//GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Red, TEXT("Cast worked")); //display a message that they have picked it up
+		if (CanBeDistroyed)
+		{
+			Destroy();
+			GEngine->AddOnScreenDebugMessage(-1, 20.0f, FColor::Red, TEXT("You Got Me!")); //display a message that they have picked it up
+			
+			//increment how many pickups the player has
+			Player->AddPickup();
 
+		}
+	}
 }
 

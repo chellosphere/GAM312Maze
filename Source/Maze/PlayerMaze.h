@@ -37,7 +37,19 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character Movement: Walking", DisplayName = "Custom Sprint Speed")
 		int SprintS = 1200; //sprinting variable
 
-	//camera variables
+							
+//Pickup Variables - blueprint read write allows them to be seen in the hud blueprint
+	
+	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "Pickups")
+		int totalPickups = 14;
+	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "Pickups")
+		int CurrentPickups = 0;
+
+	void AddPickup();
+
+	
+
+//camera variables
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* SpringArm;
 	UCameraComponent* FollowCamera;
@@ -50,8 +62,6 @@ public:
 	float BaseTurnRate = 45;
 	float BaseLookUpRate=45;
 
-
-	
 
 //movement functions
 	void Lateral(float Value);//foward/back movement
