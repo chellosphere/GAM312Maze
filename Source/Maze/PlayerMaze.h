@@ -41,19 +41,30 @@ public:
 //Pickup Variables - blueprint read write allows them to be seen in the hud blueprint
 	
 	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "Pickups")
-		int totalPickups = 14;
+		int TotalPickups = 14;
 	UPROPERTY(EditAnywhere, BluePrintReadWrite, Category = "Pickups")
 		int CurrentPickups = 0;
 
 	void AddPickup();
-
 	
+	//set the success screen widget to blueprint
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+		TSubclassOf<UUserWidget> Success;
+	UUserWidget* SuccessView;
+
+	//fuction to create widget
+	void DrawSuccess();
+
+	//player controller variable
+	APlayerController* MazeController;
 
 //camera variables
 	UPROPERTY(EditAnywhere, meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* SpringArm;
 	UCameraComponent* FollowCamera;
 	
+
+
 //turn functions
 	void LookRight(float value);
 	void LookUp(float value);

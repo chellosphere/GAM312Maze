@@ -1,8 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+/* For displaying a character by using the character class we dont need to create a skeletal mesh and assign it because 
+the character class by default. The sketal mesh is a specific type of visible mesh that can be animated using the animation starter pack
+the starter pack 
+
+The linear algebra behind moving the character in a 3d space assings a either a +1 or -1 to a key press and when the player moves the character either foward the x value
+of the foward vector is added to or subtracted from accordingly. Same with the left and right movements using the y axis. For the sprinting vs walking the speed at which a character moves
+is controlled by vector multiplation of the directional vector and the rate of movement.*/
+
 #include "PlayerMaze.h"
 #include "Components/InputComponent.h" //aded so the InputComponent would work
 #include "GameFramework/CharacterMovementComponent.h" //get character movement components
+#include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 
 
 // Sets default values
@@ -43,7 +52,9 @@ APlayerMaze::APlayerMaze()
 void APlayerMaze::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//get playercontroller
+	MazeController = Cast<APlayerController>(GetController());
+	MazeController->bShowMouseCursor = false;
 }
 
 // Called every frame
@@ -116,9 +127,9 @@ void APlayerMaze::EndSprint()
 //switch cameras
 void APlayerMaze::SwitchCams()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("pressed space")); //debug message
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("pressed space")); //debug message
 	TActorIterator<ACameraControl>CamAct(GetWorld()); //get an actor of the Scence Camera Controller
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Created Camera Controller reference")); //debug message
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("Created Camera Controller reference")); //debug message
 	CamAct->SwitchCam(GetWorld()->GetFirstPlayerController(), FollowCamera, this);
 }
 
@@ -128,6 +139,30 @@ void APlayerMaze::AddPickup()
 	CurrentPickups = CurrentPickups + 1;
 	
 	//output current number of pickups
-	FString output = FString::FromInt(CurrentPickups);
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, output);
+	//FString output = FString::FromInt(CurrentPickups);
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, output);
+
+	if (CurrentPickups == TotalPickups)
+	{
+		DrawSuccess();
+	}
+}
+
+void APlayerMaze::DrawSuccess()
+{
+
+	if (Success) // Check if the Asset is assigned in the blueprint.
+	{
+		// Create the widget using the current world and the overlay form the blueprint
+		SuccessView = CreateWidget<UUserWidget>(GetWorld(), Success);
+
+		//if the overlay creatation was successfull add the it to the view port
+		if (SuccessView)
+		{
+			//let add it to the view port
+			SuccessView->AddToViewport();
+		}
+		MazeController->bShowMouseCursor = true;
+		
+	}
 }

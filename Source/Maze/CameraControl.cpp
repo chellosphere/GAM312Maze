@@ -28,12 +28,12 @@ void ACameraControl::Tick(float DeltaTime)
 void ACameraControl::SwitchCam(APlayerController* Controller, UCameraComponent* FollowCam, AActor* Player)
 {
 
-	GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("inside switch cams")); //debug message
+	//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("inside switch cams")); //debug message
 	
 
 	if (Controller) //only do this if the controller is valid
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("player controller valid")); //debug message
+		//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("player controller valid")); //debug message
 	
 
 		if (FollowCam->bIsActive && Player) //only do this if the followcam is active and the player is valid
@@ -45,14 +45,14 @@ void ACameraControl::SwitchCam(APlayerController* Controller, UCameraComponent* 
 			//hide the player when looking over the maze
 			Player->SetActorHiddenInGame(true);
 
-			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("in overview")); //debug message
+			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("in overview")); //debug message
 
 		
 			
 		}
 		else if (!FollowCam->bIsActive)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("in follow cam inactive")); //debug message
+			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Red, TEXT("in follow cam inactive")); //debug message
 
 			if (Player)
 			{

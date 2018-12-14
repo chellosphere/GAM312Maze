@@ -23,6 +23,7 @@ public:
 	// hold the widget after making it
 	UUserWidget* HudOverlay;
 	// Override BeginPlay()
-	virtual void BeginPlay() override;
+	virtual void BeginPlay() override;
+
 	
 };

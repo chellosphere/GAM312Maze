@@ -7,6 +7,7 @@
 #include "PlayerMaze.h"
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Components/ShapeComponent.h"
+#include "Runtime/Engine/Classes/Components/AudioComponent.h"
 #include "PickUp.generated.h"
 
 
@@ -36,6 +37,10 @@ public:
 	//the static mesh that can be changed in the editor
 	UPROPERTY(EditAnywhere)
 		UStaticMeshComponent* PickUpMesh;
+
+	//audio component
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UAudioComponent* PickUpCue;
 
 
 	//the pick up box that is a box for now but can be changed in the editor
